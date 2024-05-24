@@ -1,8 +1,8 @@
 import axios from "axios";
+import {AUTH_API} from "./constants";
 
-const API = "/api/auth"
 export const refreshJwt = async (refreshToken) => {
-    return await axios.get(`${API}/refresh-token`, {
+    return await axios.get(`${AUTH_API}/refresh-token`, {
         header: {
             "Authorization": `Bearer ${refreshToken}`
         }
@@ -10,13 +10,13 @@ export const refreshJwt = async (refreshToken) => {
 }
 
 export const doLogin = async (username, password) => {
-    return await axios.post(`${API}/login`, {username, password})
+    return await axios.post(`${AUTH_API}/login`, {username, password})
         .then(response => {
             return response.data
         })
 }
 
 export const doRegister = async (registerRequest) => {
-    return await axios.post(`${API}/register`, registerRequest)
+    return await axios.post(`${AUTH_API}/register`, registerRequest)
         .then(response => response.status)
 }
