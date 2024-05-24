@@ -4,10 +4,9 @@ import com.web.server.dto.request.AuthRequest;
 import com.web.server.dto.request.RegisterRequest;
 import com.web.server.dto.response.AuthResponse;
 import com.web.server.dto.response.Response;
-import com.web.server.usecases.AuthUseCase;
+import com.web.server.services.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthUseCase authUseCase;
+    private final AuthService authService;
 
     @PostMapping("/login")
     public Response<AuthResponse> login(@RequestBody @Valid AuthRequest request){
-        return Response.ok(authUseCase.login(request));
+        return Response.ok(authService.login(request));
     }
 
     @PostMapping("/register")
@@ -31,18 +30,18 @@ public class AuthController {
             RegisterRequest registerRequest,
             HttpServletRequest servletRequest
     ) {
-        authUseCase.register(registerRequest, servletRequest.getRemoteUser());
+        authService.register(registerRequest, servletRequest.getRemoteUser());
         return Response.ok("Successfully registered !");
     }
 
     @GetMapping("/logout")
     public Response<?> logout() {
-        authUseCase.logout();
+        authService.logout();
         return null;
     }
 
     @PostMapping("/refresh-token")
     public Response<AuthResponse> refreshToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
-        return Response.ok(authUseCase.refreshToken(authHeader));
+        return Response.ok(authService.refreshToken(authHeader));
     }
 }

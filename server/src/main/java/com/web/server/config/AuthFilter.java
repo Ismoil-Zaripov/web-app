@@ -1,6 +1,6 @@
 package com.web.server.config;
 
-import com.web.server.usecases.JwtUseCase;
+import com.web.server.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthFilter extends OncePerRequestFilter {
 
-    private final JwtUseCase jwtUseCase;
+    private final JwtService jwtUseCase;
     private final UserDetailsService userDetailsService;
 
     @Override

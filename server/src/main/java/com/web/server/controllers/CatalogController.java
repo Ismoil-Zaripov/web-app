@@ -3,14 +3,9 @@ package com.web.server.controllers;
 import com.web.server.dto.request.CatalogRequest;
 import com.web.server.dto.response.CatalogResponse;
 import com.web.server.dto.response.Response;
-import com.web.server.usecases.CatalogUseCase;
+import com.web.server.services.CatalogService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/catalogs")
 public class CatalogController {
 
-    private final CatalogUseCase useCase;
+    private final CatalogService useCase;
 
 //    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping

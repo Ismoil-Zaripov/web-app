@@ -3,9 +3,8 @@ package com.web.server.controllers;
 import com.web.server.dto.response.OrderResponse;
 import com.web.server.dto.response.ProductResponse;
 import com.web.server.dto.response.Response;
-import com.web.server.usecases.OrderUseCase;
+import com.web.server.services.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/orders")
 public class OrderController {
 
-    private final OrderUseCase useCase;
+    private final OrderService useCase;
 
 //    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/make-order/{email}")

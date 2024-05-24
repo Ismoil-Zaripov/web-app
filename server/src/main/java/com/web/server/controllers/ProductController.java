@@ -3,10 +3,9 @@ package com.web.server.controllers;
 import com.web.server.dto.request.ProductRequest;
 import com.web.server.dto.response.ProductResponse;
 import com.web.server.dto.response.Response;
-import com.web.server.usecases.ProductUseCase;
+import com.web.server.services.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
 
-    private final ProductUseCase useCase;
+    private final ProductService useCase;
     
 //    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping

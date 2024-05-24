@@ -1,6 +1,7 @@
 package com.web.server.exception;
 
 import com.web.server.dto.response.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -34,7 +35,6 @@ public class AppExceptionHandler {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
 
-        /**
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
             errors.put(
@@ -42,9 +42,11 @@ public class AppExceptionHandler {
                     fieldError.getDefaultMessage()
             );
         });
-         */
 
-        return ResponseEntity.of(Optional.of(Response.badRequest(ex.getBindingResult().getFieldError().getDefaultMessage())));
+        return new ResponseEntity<>(
+                Response.fieldError(errors),
+                HttpStatus.BAD_REQUEST
+        );
     }
 
 }

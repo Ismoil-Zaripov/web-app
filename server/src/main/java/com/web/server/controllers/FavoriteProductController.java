@@ -2,7 +2,7 @@ package com.web.server.controllers;
 
 import com.web.server.dto.response.ProductResponse;
 import com.web.server.dto.response.Response;
-import com.web.server.usecases.FavoriteProductUseCase;
+import com.web.server.services.FavoriteProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/favorite-products")
 public class FavoriteProductController {
 
-    private final FavoriteProductUseCase useCase;
+    private final FavoriteProductService useCase;
 
     @PostMapping
     public Response<String> addFavoriteProduct(
